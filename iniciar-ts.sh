@@ -4,6 +4,7 @@ if [ -z "$1" ]; then
 	echo "Se ejecuta como: inits <nombre_directorio>"
 	exit 1
 fi
+
 # Directorio actual o raiz
 PROJECT_DIR=$(pwd)
 cd "$PROJECT_DIR"
@@ -12,11 +13,14 @@ cd "$PROJECT_DIR"
 mkdir "$1"
 cd "$1"
 
+# > /dev/null 2>&1, se utiliza para no mostrar la salida del comando en consola
+# en caso de error si muestra la salida
+
 git init > /dev/null 2>&1
 npm install -g typescript > /dev/null 2>&1 
-npm init -y > /dev/null 2>&1 #package.json
-tsc --init > /dev/null 2>&1 #tsconfig
-npm i > /dev/null 2>&1 #dependencias
+npm init -y > /dev/null 2>&1 # package.json
+tsc --init > /dev/null 2>&1 # tsconfig.json
+npm i > /dev/null 2>&1 # Instalar dependencias
 
 echo "node_modules\n.env" >> .gitignore
 echo "$1" >> README.md
